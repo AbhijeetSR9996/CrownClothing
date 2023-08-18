@@ -76,4 +76,3 @@ Some SCREENSHOTS of this project are :-
 
 ![Screenshot (9)](https://user-images.githubusercontent.com/47415323/218169404-8708de6d-21ce-4fbd-82ac-ba137d9e34a0.png)
 
-Also, check LIVE project by clicking on : https://abhijeetsr9996.github.io/CrownClothing/ 
