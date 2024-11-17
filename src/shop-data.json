@@ -52,5 +52,65 @@
     "name": "Blue Snapback",
     "imageUrl": "https://i.ibb.co/X2VJP2W/blue-snapback.png",
     "price": 16
+  },
+    {
+    "id": 10,
+    "name": "Brown Jacket",
+    "imageUrl": "https://i.ibb.co/j33JC9p/brown-jacket.jpg",
+    "price": 25
+  },
+  {
+    "id": 11,
+    "name": "Bomber Jacket",
+    "imageUrl": "https://i.ibb.co/LggZp23/bomber-jacket.jpg",
+    "price": 18
+  },
+  {
+    "id": 12,
+    "name": "Suede Jacket",
+    "imageUrl": "https://i.ibb.co/RbBvqYf/suede-jacket.jpg",
+    "price": 35
+  },
+  {
+    "id": 13,
+    "name": "Denim Jacket",
+    "imageUrl": "https://i.ibb.co/kgh8jK4/denim-jacket.jpg",
+    "price": 25
+  },
+  {
+    "id": 14,
+    "name": "Camouflage Jacket",
+    "imageUrl": "https://i.ibb.co/HTmPt4S/camouflage-jacket.jpg",
+    "price": 18
+  },
+  {
+    "id": 15,
+    "name": "Black Sneakers",
+    "imageUrl": "https://i.ibb.co/t49CvcF/black-sneakers.jpg",
+    "price": 14
+  },
+  {
+    "id": 16,
+    "name": "Grey Sneakers",
+    "imageUrl": "https://i.ibb.co/mBBmsJc/grey-sneakers.jpg",
+    "price": 18
+  },
+  {
+    "id": 17,
+    "name": "AllStar Sneakers",
+    "imageUrl": "https://i.ibb.co/7SDWMNV/Converse-All-Star-sneakers.jpg",
+    "price": 14
+  },
+  {
+    "id": 18,
+    "name": "White-Cream Sneakers",
+    "imageUrl": "https://i.ibb.co/9Nt6fby/white-cream-sneakers.jpg",
+    "price": 16
+  },
+  {
+    "id": 19,
+    "name": "Colorful Sneakers",
+    "imageUrl": "https://i.ibb.co/Jjm0Ldg/colorful-sneakers.jpg",
+    "price": 25
   }
 ]
