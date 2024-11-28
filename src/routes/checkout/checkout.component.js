@@ -40,7 +40,10 @@ const Checkout = () => {
 
   return (
     <div className="checkout-container">
-      <div className="checkout-header">
+
+      {cartTotal ? (
+        <>
+       <div className="checkout-header">
         <div className="header-block">
           <span>Product</span>
         </div>
@@ -60,11 +63,9 @@ const Checkout = () => {
       {cartItems.map((cartItem) => (
         <CheckoutItem key={cartItem.id} cartItem={cartItem} />
       ))}
-      {/* <div className="total">TOTAL AMOUNT: &#x20B9;{cartTotal}</div> */}
-      {cartTotal ? (
         <div className="total">
           TOTAL AMOUNT: &#x20B9;{cartTotal}
-          {/* <Button onClick={handleClick}> BUY NOW </Button> */}
+          
           <Button onClick={handleOpenNow}> BUY NOW </Button>
           <div>&nbsp;</div>
           {isOpenNow && (
@@ -110,6 +111,7 @@ const Checkout = () => {
             </div>
           )}
         </div>
+        </>
       ) : (
         <div>
           &nbsp;
