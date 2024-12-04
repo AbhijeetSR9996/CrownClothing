@@ -13,9 +13,9 @@ const CategoryItem = ({ category }) => {
       />
       <div className="category-body-container">
         <h2>{title}</h2>
-        <Link className="nav-link" to="/shop">
+       {/* <Link className="nav-link" to="/shop">
           Shop Now
-        </Link>
+        </Link> */}
       </div>
     </div>
   );
