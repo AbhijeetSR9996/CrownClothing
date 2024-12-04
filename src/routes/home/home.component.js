@@ -1,8 +1,14 @@
 import { Outlet } from 'react-router-dom';
-
+import { useNavigate } from "react-router-dom";
 import Directory from '../../components/directory/directory.component';
+import Button from "../../components/button/button.component";
 
 const Home = () => {
+  const navigate = useNavigate();
+
+  const goToShop = () => {
+    navigate("/shop");
+  };
   const categories = [
     {
       id: 1,
@@ -31,11 +37,17 @@ const Home = () => {
     },
   ];
 
+  
   return (
-    <div>
+    <>
+    <div >
       <Directory categories={categories} />
       <Outlet />
+      <div style={{display:'flex',justifyContent:'center',backgroundColor:'transparent',}}>
+          <Button onClick={goToShop} >STILL THINKING?? GO AND EXPLORE 👉👉 HERE 👈👈</Button>
+          </div>
     </div>
+    </>
   );
 };
 
