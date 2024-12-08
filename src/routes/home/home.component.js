@@ -1,97 +1,60 @@
-import React from "react";
+import { Outlet } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import Directory from "../../components/directory/directory.component";
+import Button from "../../components/button/button.component";
 
 const Home = () => {
   const navigate = useNavigate();
 
-  const images = [
+  const goToShop = () => {
+    navigate("/shop");
+  };
+  const categories = [
     {
       id: 1,
-      label: "hats",
-      filter: "hats",
+      title: "hats",
       imageUrl: "https://i.ibb.co/cvpntL1/hats.png",
     },
     {
       id: 2,
-      label: "jackets",
-      filter: "jackets",
+      title: "jackets",
       imageUrl: "https://i.ibb.co/px2tCc3/jackets.png",
     },
     {
       id: 3,
-      label: "sneakers",
-      filter: "sneakers",
+      title: "sneakers",
       imageUrl: "https://i.ibb.co/0jqHpnp/sneakers.png",
     },
     {
       id: 4,
-      label: "womens",
-      filter: "womens",
+      title: "womens",
       imageUrl: "https://i.ibb.co/GCCdy8t/womens.png",
     },
     {
       id: 5,
-      label: "mens",
-      filter: "mens",
+      title: "mens",
       imageUrl: "https://i.ibb.co/R70vBrQ/men.png",
     },
   ];
 
-  const handleNavigation = (filter) => {
-    navigate(`/shop?filter=${filter}`);
-  };
-
   return (
-    <div
-      style={{
-        display: "flex",
-        flexWrap: "wrap",
-        justifyContent: "center",
-        gap: "10px",
-      }}
-    >
-      {images.map((image) => (
+    <>
+      <div>
+        <Directory categories={categories} />
+        <Outlet />
         <div
-          key={image.id}
           style={{
-            backgroundImage: `url(${image.imageUrl})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            height: "300px",
-            width: "400px",
             display: "flex",
-            flexWrap: "wrap",
-            alignItems: "center",
             justifyContent: "center",
-            position: "relative",
-            cursor: "pointer",
-            overflow: "hidden",
-            border: "1px solid black",
+            backgroundColor: "transparent",
           }}
-          onClick={() => handleNavigation(image.filter)}
         >
-          <span
-            style={{
-              backgroundColor: "white",
-              alignItems: "center",
-              justifyContent: "center",
-              padding: "10px 20px",
-              //padding: '0 25px',
-              margin: "0 6px 0",
-              fontSize: "16px",
-              //borderRadius:'5px',
-              fontWeight: "bolder",
-              color: "#4a4a4a",
-              opacity: "0.7",
-              border: "1px solid black",
-              position: "relative",
-            }}
-          >
-            {image.label}
-          </span>
+          <Button onClick={goToShop}>
+            STILL THINKING?? GO AND EXPLORE 👉👉 HERE 👈👈
+          </Button>
         </div>
-      ))}
-    </div>
+      </div>
+    </>
   );
 };
 
