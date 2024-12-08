@@ -1,53 +1,97 @@
-import { Outlet } from 'react-router-dom';
+import React from "react";
 import { useNavigate } from "react-router-dom";
-import Directory from '../../components/directory/directory.component';
-import Button from "../../components/button/button.component";
 
 const Home = () => {
   const navigate = useNavigate();
 
-  const goToShop = () => {
-    navigate("/shop");
-  };
-  const categories = [
+  const images = [
     {
       id: 1,
-      title: 'hats',
-      imageUrl: 'https://i.ibb.co/cvpntL1/hats.png',
+      label: "hats",
+      filter: "hats",
+      imageUrl: "https://i.ibb.co/cvpntL1/hats.png",
     },
     {
       id: 2,
-      title: 'jackets',
-      imageUrl: 'https://i.ibb.co/px2tCc3/jackets.png',
+      label: "jackets",
+      filter: "jackets",
+      imageUrl: "https://i.ibb.co/px2tCc3/jackets.png",
     },
     {
       id: 3,
-      title: 'sneakers',
-      imageUrl: 'https://i.ibb.co/0jqHpnp/sneakers.png',
+      label: "sneakers",
+      filter: "sneakers",
+      imageUrl: "https://i.ibb.co/0jqHpnp/sneakers.png",
     },
     {
       id: 4,
-      title: 'womens',
-      imageUrl: 'https://i.ibb.co/GCCdy8t/womens.png',
+      label: "womens",
+      filter: "womens",
+      imageUrl: "https://i.ibb.co/GCCdy8t/womens.png",
     },
     {
       id: 5,
-      title: 'mens',
-      imageUrl: 'https://i.ibb.co/R70vBrQ/men.png',
+      label: "mens",
+      filter: "mens",
+      imageUrl: "https://i.ibb.co/R70vBrQ/men.png",
     },
   ];
 
-  
+  const handleNavigation = (filter) => {
+    navigate(`/shop?filter=${filter}`);
+  };
+
   return (
-    <>
-    <div >
-      <Directory categories={categories} />
-      <Outlet />
-      <div style={{display:'flex',justifyContent:'center',backgroundColor:'transparent',}}>
-          <Button onClick={goToShop} >STILL THINKING?? GO AND EXPLORE 👉👉 HERE 👈👈</Button>
-          </div>
+    <div
+      style={{
+        display: "flex",
+        flexWrap: "wrap",
+        justifyContent: "center",
+        gap: "10px",
+      }}
+    >
+      {images.map((image) => (
+        <div
+          key={image.id}
+          style={{
+            backgroundImage: `url(${image.imageUrl})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            height: "300px",
+            width: "400px",
+            display: "flex",
+            flexWrap: "wrap",
+            alignItems: "center",
+            justifyContent: "center",
+            position: "relative",
+            cursor: "pointer",
+            overflow: "hidden",
+            border: "1px solid black",
+          }}
+          onClick={() => handleNavigation(image.filter)}
+        >
+          <span
+            style={{
+              backgroundColor: "white",
+              alignItems: "center",
+              justifyContent: "center",
+              padding: "10px 20px",
+              //padding: '0 25px',
+              margin: "0 6px 0",
+              fontSize: "16px",
+              //borderRadius:'5px',
+              fontWeight: "bolder",
+              color: "#4a4a4a",
+              opacity: "0.7",
+              border: "1px solid black",
+              position: "relative",
+            }}
+          >
+            {image.label}
+          </span>
+        </div>
+      ))}
     </div>
-    </>
   );
 };
 
