@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ProductCard from "../../components/product-card/product-card.component";
 import PRODUCTS from "../../shop-data.json";
-//import "./shop.styles.scss";
+import "./shop.styles.scss";
 //import Button from "../../components/button/button.component";
 
 const Shop = () => {
@@ -10,35 +10,36 @@ const Shop = () => {
   const [activeButton, setActiveButton] = useState("all");
 
   //filter function
-  // const filterProducts = (category) => {
-  //   const filtered =
-  //     category === "all"
-  //       ? PRODUCTS
-  //       : PRODUCTS.filter(
-  //           (item) => item.category === category || item.gender === category
-  //         );
-  //   console.log("filtered products:", filtered);
-  //   setFilteredProducts(filtered);
-  //   setActiveButton(category);
-  // };
 
   const filterProducts = (category) => {
-    if (category === "all") {
-      setFilteredProducts(PRODUCTS);
-    }
-    if (category === "men") {
-      setFilteredProducts(PRODUCTS.filter((item) => item.gender === category));
-    }
-    if (category === "women") {
-      setFilteredProducts(PRODUCTS.filter((item) => item.gender === category));
-    }
-    // if (category === "cap" || category === "jacket" || category === "sneaker") {
-    //   setFilteredProducts(
-    //     PRODUCTS.filter((item) => item.category === category)
-    //   );
-    // }
+    const filtered =
+      category === "all"
+        ? PRODUCTS
+        : PRODUCTS.filter(
+            (item) => item.category === category || item.gender === category
+          );
+    console.log("filtered products:", filtered);
+    setFilteredProducts(filtered);
     setActiveButton(category);
   };
+
+  // const filterProducts = (category) => {
+  //   if (category === "all") {
+  //     setFilteredProducts(PRODUCTS);
+  //   }
+  //   if (category === "men") {
+  //     setFilteredProducts(PRODUCTS.filter((item) => item.gender === category));
+  //   }
+  //   if (category === "women") {
+  //     setFilteredProducts(PRODUCTS.filter((item) => item.gender === category));
+  //   }
+  //   if (category === "cap" || category === "jacket" || category === "sneaker") {
+  //     setFilteredProducts(
+  //       PRODUCTS.filter((item) => item.category === category)
+  //     );
+  //   }
+  //   setActiveButton(category);
+  // };
 
   //categories
   const categories = [
