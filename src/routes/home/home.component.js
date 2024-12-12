@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ProductCard from "../../components/product-card/product-card.component";
 import PRODUCTS from "../../shop-data.json";
-import "./shop.styles.scss";
+//import "./shop.styles.scss";
 //import Button from "../../components/button/button.component";
 
 const Shop = () => {
