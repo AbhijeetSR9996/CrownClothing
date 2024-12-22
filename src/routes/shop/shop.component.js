@@ -1,75 +1,54 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ProductCard from "../../components/product-card/product-card.component";
-import PRODUCTS from "../../shop-data.json";
 import "./shop.styles.scss";
 import Button from "../../components/button/button.component";
+import PRODUCTS from "../../shop-data.json"; // Assuming static JSON data
 
 const Shop = () => {
-  const [filteredProducts, setFilteredProducts] = useState(PRODUCTS);
-  //Track active button
-  const [activeButton, setActiveButton] = useState("all");
-  //Track search term
-  const [searchTerm, setSearchTerm] = useState("");
+  const [products] = useState(PRODUCTS); // All products
+  const [filteredProducts, setFilteredProducts] = useState(PRODUCTS); // Displayed products
+  const [activeButton, setActiveButton] = useState("all"); // Active filter button
+  const [searchTerm, setSearchTerm] = useState(""); // Search term
 
-  //Filter by Caps
-  const filterCaps = () => {
-    const caps = PRODUCTS.filter((item) => item.category === "Cap");
-    setFilteredProducts(caps);
-    setActiveButton("caps"); //set active button
-    setSearchTerm("");
-  };
+  // Update filters dynamically
+  const applyFilters = () => {
+    let filtered = products;
 
-  //Filter by Caps
-  const filterJackets = () => {
-    const jackets = PRODUCTS.filter((item) => item.category === "Jacket");
-    setFilteredProducts(jackets);
-    setActiveButton("jackets"); //set active button
-    setSearchTerm("");
-  };
+    // Filter by search term
+    if (searchTerm.trim()) {
+      filtered = filtered.filter(
+        (product) =>
+          product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          product.category.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          product.gender.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    }
 
-  //Filter by Sneakers
-  const filterSneakers = () => {
-    const sneakers = PRODUCTS.filter((item) => item.category === "Sneaker");
-    setFilteredProducts(sneakers);
-    setActiveButton("sneakers"); //set active button
-    setSearchTerm("");
-  };
-
-  //Filter by Men
-  const filterMen = () => {
-    const men = PRODUCTS.filter((item) => item.gender === "men");
-    setFilteredProducts(men);
-    setActiveButton("men"); //set active button
-    setSearchTerm("");
-  };
-
-  //Filter by Women
-  const filterWomen = () => {
-    const women = PRODUCTS.filter((item) => item.gender === "women");
-    setFilteredProducts(women);
-    setActiveButton("women"); //set active button
-    setSearchTerm("");
-  };
-
-  //Show All Items
-  const showAll = () => {
-    setFilteredProducts(PRODUCTS);
-    setActiveButton("all"); //set active button
-    setSearchTerm("");
-  };
-
-  //handle search filtering
-  const handleSearch = () => {
-    //dynamically filter based on search term & active button
-    const filtered = PRODUCTS.filter(
-      (product) =>
-        product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        product.category.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        product.gender.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    // Apply additional filters based on the active button
+    if (activeButton !== "all") {
+      if (["caps", "jackets", "sneakers"].includes(activeButton)) {
+        filtered = filtered.filter(
+          (product) => product.category.toLowerCase() === activeButton
+        );
+      } else if (["men", "women"].includes(activeButton)) {
+        filtered = filtered.filter(
+          (product) => product.gender.toLowerCase() === activeButton
+        );
+      }
+    }
 
     setFilteredProducts(filtered);
-    setActiveButton(""); //clear active button when searching
+  };
+
+  // Re-apply filters when search term or active button changes
+  useEffect(() => {
+    applyFilters();
+  }, [searchTerm, activeButton]);
+
+  // Reset all filters
+  const resetFilters = () => {
+    setSearchTerm("");
+    setActiveButton("all");
   };
 
   return (
@@ -96,24 +75,60 @@ const Shop = () => {
           }}
         />
         <Button
-          onClick={handleSearch}
+          onClick={applyFilters}
           style={{ fontFamily: "Open Sans Condensed" }}
         >
-          {" "}
-          SEARCH{" "}
+          SEARCH
         </Button>
-        <Button onClick={showAll} style={{ fontFamily: "Open Sans Condensed" }}>
-          {" "}
-          RESET{" "}
+        <Button
+          onClick={resetFilters}
+          style={{ fontFamily: "Open Sans Condensed" }}
+        >
+          RESET
         </Button>
       </div>
-      &nbsp;
+
+      {/* Filter Buttons */}
+      <div style={{ display: "flex", justifyContent: "center", gap: "10px" }}>
+        <Button
+          onClick={() => setActiveButton("cap")}
+          className={activeButton === "cap" ? "active" : ""}
+        >
+          Caps
+        </Button>
+        <Button
+          onClick={() => setActiveButton("jacket")}
+          className={activeButton === "jacket" ? "active" : ""}
+        >
+          Jackets
+        </Button>
+        <Button
+          onClick={() => setActiveButton("sneaker")}
+          className={activeButton === "sneaker" ? "active" : ""}
+        >
+          Sneakers
+        </Button>
+        <Button
+          onClick={() => setActiveButton("men")}
+          className={activeButton === "men" ? "active" : ""}
+        >
+          Men
+        </Button>
+        <Button
+          onClick={() => setActiveButton("women")}
+          className={activeButton === "women" ? "active" : ""}
+        >
+          Women
+        </Button>
+        <Button
+          onClick={() => setActiveButton("all")}
+          className={activeButton === "all" ? "active" : ""}
+        >
+          All
+        </Button>
+      </div>
+
       {/* Product List */}
-      {/* <div className="products-container">
-        {filteredProducts.map((product) => (
-          <ProductCard key={product.id} product={product} />
-        ))}
-      </div> */}
       <div className="products-container">
         {filteredProducts.length > 0 ? (
           filteredProducts.map((product) => (
@@ -125,20 +140,12 @@ const Shop = () => {
               display: "flex",
               flexDirection: "column",
               justifyContent: "center",
-              alignContent: "center",
+              alignItems: "center",
               height: "50vh",
-              width: "195vh",
-              textAlign: "center",
-              //backgroundColor: "lime",
-              //alignSelf: "center",
-              //marginLeft: "40vh",
             }}
-            //className="products-container"
           >
-            <h3 style={{ margin: "10px 0" }}>No products found..!!</h3>
-            <p style={{ margin: "0" }}>
-              Try adjusting your search or filter criteria.
-            </p>
+            <h3>No products found..!!</h3>
+            <p>Try adjusting your search or filter criteria.</p>
           </div>
         )}
       </div>
