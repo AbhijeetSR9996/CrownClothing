@@ -5,14 +5,14 @@ import Button from "../../components/button/button.component";
 import PRODUCTS from "../../shop-data.json"; // Assuming static JSON data
 
 const Shop = () => {
-  const [products] = useState(PRODUCTS); // All products
-  const [filteredProducts, setFilteredProducts] = useState(PRODUCTS); // Displayed products
-  const [activeButton, setActiveButton] = useState("all"); // Active filter button
-  const [searchTerm, setSearchTerm] = useState(""); // Search term
+  const [products] = useState(PRODUCTS); // All products (static)
+  const [filteredProducts, setFilteredProducts] = useState(PRODUCTS); // Products to display
+  const [searchTerm, setSearchTerm] = useState(""); // Search input
+  const [activeButton, setActiveButton] = useState("all"); // Currently active filter
 
-  // Update filters dynamically
+  // Function to filter products
   const applyFilters = () => {
-    let filtered = products;
+    let filtered = [...products]; // Work on a copy of the product list
 
     // Filter by search term
     if (searchTerm.trim()) {
@@ -24,9 +24,9 @@ const Shop = () => {
       );
     }
 
-    // Apply additional filters based on the active button
+    // Apply category or gender filters
     if (activeButton !== "all") {
-      if (["caps", "jackets", "sneakers"].includes(activeButton)) {
+      if (["cap", "jacket", "sneaker"].includes(activeButton)) {
         filtered = filtered.filter(
           (product) => product.category.toLowerCase() === activeButton
         );
@@ -40,21 +40,22 @@ const Shop = () => {
     setFilteredProducts(filtered);
   };
 
-  // Re-apply filters when search term or active button changes
+  // Apply filters whenever searchTerm or activeButton changes
   useEffect(() => {
     applyFilters();
   }, [searchTerm, activeButton]);
 
-  // Reset all filters
+  // Reset filters
   const resetFilters = () => {
     setSearchTerm("");
     setActiveButton("all");
+    setFilteredProducts(products); // Reset to all products
   };
 
   return (
     <div style={{ flex: 1 }}>
       {/* Search Bar */}
-      <div
+      {/* <div
         style={{
           display: "flex",
           marginBottom: "20px",
@@ -86,7 +87,7 @@ const Shop = () => {
         >
           RESET
         </Button>
-      </div>
+      </div> */}
 
       {/* Filter Buttons */}
       <div style={{ display: "flex", justifyContent: "center", gap: "10px" }}>
@@ -154,3 +155,5 @@ const Shop = () => {
 };
 
 export default Shop;
+
+
