@@ -1,33 +1,55 @@
-import React from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useState, useEffect } from "react";
 import ProductCard from "../../components/product-card/product-card.component";
-import Button from "../../components/button/button.component";
-import {
-  setActiveButton,
-  setSearchTerm,
-  applyFilters,
-  resetFilters,
-} from "../../features/products/productsSlice";
 import "./shop.styles.scss";
+import Button from "../../components/button/button.component";
+import PRODUCTS from "../../shop-data.json"; // Assuming static JSON data
 
 const Shop = () => {
-  const dispatch = useDispatch();
-  const { filteredProducts, searchTerm, activeButton } = useSelector(
-    (state) => state.products
-  );
+  const [products] = useState(PRODUCTS); // All products (static)
+  const [filteredProducts, setFilteredProducts] = useState(PRODUCTS); // Products to display
+  const [searchTerm, setSearchTerm] = useState(""); // Search input
+  const [activeButton, setActiveButton] = useState("all"); // Currently active filter
 
-  const handleFilterClick = (button) => {
-    dispatch(setActiveButton(button));
-    dispatch(applyFilters());
+  // Function to filter products
+  const applyFilters = () => {
+    let filtered = [...products]; // Work on a copy of the product list
+
+    // Filter by search term
+    if (searchTerm.trim()) {
+      filtered = filtered.filter(
+        (product) =>
+          product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          product.category.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          product.gender.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    }
+
+    // Apply category or gender filters
+    if (activeButton !== "all") {
+      if (["cap", "jacket", "sneaker"].includes(activeButton)) {
+        filtered = filtered.filter(
+          (product) => product.category.toLowerCase() === activeButton
+        );
+      } else if (["men", "women"].includes(activeButton)) {
+        filtered = filtered.filter(
+          (product) => product.gender.toLowerCase() === activeButton
+        );
+      }
+    }
+
+    setFilteredProducts(filtered);
   };
 
-  const handleSearchChange = (event) => {
-    dispatch(setSearchTerm(event.target.value));
-    dispatch(applyFilters());
-  };
+  // Apply filters whenever searchTerm or activeButton changes
+  useEffect(() => {
+    applyFilters();
+  }, [searchTerm, activeButton]);
 
-  const handleReset = () => {
-    dispatch(resetFilters());
+  // Reset filters
+  const resetFilters = () => {
+    setSearchTerm("");
+    setActiveButton("all");
+    setFilteredProducts(products); // Reset to all products
   };
 
   return (
@@ -45,7 +67,7 @@ const Shop = () => {
           type="text"
           placeholder="Search for products..."
           value={searchTerm}
-          onChange={handleSearchChange}
+          onChange={(e) => setSearchTerm(e.target.value)}
           style={{
             padding: "10px",
             width: "80%",
@@ -54,7 +76,13 @@ const Shop = () => {
           }}
         />
         <Button
-          onClick={handleReset}
+          onClick={applyFilters}
+          style={{ fontFamily: "Open Sans Condensed" }}
+        >
+          SEARCH
+        </Button>
+        <Button
+          onClick={resetFilters}
           style={{ fontFamily: "Open Sans Condensed" }}
         >
           RESET
@@ -62,52 +90,44 @@ const Shop = () => {
       </div> */}
 
       {/* Filter Buttons */}
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          gap: "10px",
-          paddingBottom: "10px",
-        }}
-      >
+      {/* <div style={{ display: "flex", justifyContent: "center", gap: "10px" }}>
         <Button
-          onClick={() => handleFilterClick("cap")}
+          onClick={() => setActiveButton("cap")}
           className={activeButton === "cap" ? "active" : ""}
         >
           🧢
         </Button>
         <Button
-          onClick={() => handleFilterClick("jacket")}
+          onClick={() => setActiveButton("jacket")}
           className={activeButton === "jacket" ? "active" : ""}
         >
           🧥
         </Button>
         <Button
-          onClick={() => handleFilterClick("sneaker")}
+          onClick={() => setActiveButton("sneaker")}
           className={activeButton === "sneaker" ? "active" : ""}
         >
           👟
         </Button>
         <Button
-          onClick={() => handleFilterClick("men")}
+          onClick={() => setActiveButton("men")}
           className={activeButton === "men" ? "active" : ""}
         >
           🚹
         </Button>
         <Button
-          onClick={() => handleFilterClick("women")}
+          onClick={() => setActiveButton("women")}
           className={activeButton === "women" ? "active" : ""}
         >
           🚺
         </Button>
         <Button
-          onClick={() => handleFilterClick("all")}
+          onClick={() => setActiveButton("all")}
           className={activeButton === "all" ? "active" : ""}
-          style={{ fontFamily: "Open Sans Condensed" }}
         >
-          ALL
+          All
         </Button>
-      </div>
+      </div> */}
 
       {/* Product List */}
       <div className="products-container">
