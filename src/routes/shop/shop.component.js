@@ -90,44 +90,44 @@ const Shop = () => {
       </div> */}
 
       {/* Filter Buttons */}
-      // <div style={{ display: "flex", justifyContent: "center", gap: "10px" }}>
-      //   <Button
-      //     onClick={() => setActiveButton("cap")}
-      //     className={activeButton === "cap" ? "active" : ""}
-      //   >
-      //     Caps
-      //   </Button>
-      //   <Button
-      //     onClick={() => setActiveButton("jacket")}
-      //     className={activeButton === "jacket" ? "active" : ""}
-      //   >
-      //     Jackets
-      //   </Button>
-      //   <Button
-      //     onClick={() => setActiveButton("sneaker")}
-      //     className={activeButton === "sneaker" ? "active" : ""}
-      //   >
-      //     Sneakers
-      //   </Button>
-      //   <Button
-      //     onClick={() => setActiveButton("men")}
-      //     className={activeButton === "men" ? "active" : ""}
-      //   >
-      //     Men
-      //   </Button>
-      //   <Button
-      //     onClick={() => setActiveButton("women")}
-      //     className={activeButton === "women" ? "active" : ""}
-      //   >
-      //     Women
-      //   </Button>
-      //   <Button
-      //     onClick={() => setActiveButton("all")}
-      //     className={activeButton === "all" ? "active" : ""}
-      //   >
-      //     All
-      //   </Button>
-      // </div>
+      {/* <div style={{ display: "flex", justifyContent: "center", gap: "10px" }}>
+        <Button
+          onClick={() => setActiveButton("cap")}
+          className={activeButton === "cap" ? "active" : ""}
+        >
+          🧢
+        </Button>
+        <Button
+          onClick={() => setActiveButton("jacket")}
+          className={activeButton === "jacket" ? "active" : ""}
+        >
+          🧥
+        </Button>
+        <Button
+          onClick={() => setActiveButton("sneaker")}
+          className={activeButton === "sneaker" ? "active" : ""}
+        >
+          👟
+        </Button>
+        <Button
+          onClick={() => setActiveButton("men")}
+          className={activeButton === "men" ? "active" : ""}
+        >
+          🚹
+        </Button>
+        <Button
+          onClick={() => setActiveButton("women")}
+          className={activeButton === "women" ? "active" : ""}
+        >
+          🚺
+        </Button>
+        <Button
+          onClick={() => setActiveButton("all")}
+          className={activeButton === "all" ? "active" : ""}
+        >
+          All
+        </Button>
+      </div> */}
 
       {/* Product List */}
       <div className="products-container">
@@ -155,5 +155,3 @@ const Shop = () => {
 };
 
 export default Shop;
-
-
